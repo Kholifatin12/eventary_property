@@ -9,11 +9,30 @@ class SidebarItem {
 }
 
 const List<SidebarItem> sidebarItems = [
-  SidebarItem(icon: Icons.dashboard_rounded, label: 'Dashboard'),
-  SidebarItem(icon: Icons.inventory_2_rounded, label: 'Eventaris'),
-  SidebarItem(icon: Icons.map_rounded, label: 'Peta Properti'),
-  SidebarItem(icon: Icons.event_rounded, label: 'Events'),
-  SidebarItem(icon: Icons.settings_rounded, label: 'Settings'),
+  SidebarItem(
+    icon: Icons.dashboard_rounded,
+    label: 'Dashboard',
+  ),
+  SidebarItem(
+    icon: Icons.inventory_2_rounded,
+    label: 'Eventaris',
+  ),
+  SidebarItem(
+    icon: Icons.map_rounded,
+    label: 'Peta Properti',
+  ),
+  SidebarItem(
+    icon: Icons.build_circle_outlined,
+    label: 'Maintenance',
+  ),
+  SidebarItem(
+    icon: Icons.event_rounded,
+    label: 'Events',
+  ),
+  SidebarItem(
+    icon: Icons.settings_rounded,
+    label: 'Settings',
+  ),
 ];
 
 /// Left navigation rail. `selectedIndex`/`onSelect` are lifted up to

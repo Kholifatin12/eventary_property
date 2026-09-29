@@ -1,3 +1,4 @@
+import 'package:eventary_prototype/admin/maintenance/view/maintenance_screen.dart';
 import 'package:eventary_prototype/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart' show LatLng;
@@ -10,6 +11,7 @@ import '../widgets/property_detail.dart';
 import '../widgets/property_map.dart';
 import '../widgets/sidebar.dart';
 import 'admin_dashboard_screen.dart';
+
 
 const double _narrowBreakpoint = 900;
 const double _stackedDetailBreakpoint = 1150;
@@ -152,37 +154,77 @@ class _HomeScreenState extends State<HomeScreen> {
   // ---- Main content: switches based on the selected sidebar menu ------
 
   Widget _buildMainContent(bool isNarrow, bool stackDetail) {
-    switch (_selectedMenu) {
-      case 0: // Dashboard -> ringkasan/statistik (KPI + grafik).
-        return DashboardScreen(properties: _properties);
-      case 1: // Eventaris -> tabel inventaris aset (dulu ada di index 0).
-        return AdminDashboardScreen(
-          properties: _properties,
-          onAdd: _addProperty,
-          onUpdate: _updateProperty,
-          onDelete: _deleteProperty,
-          onViewOnMap: _viewPropertyOnMap,
-        );
-      case 2: // Peta Properti -> map + search/filter UI (dulu index 1).
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildTopBar(isNarrow),
-            const SizedBox(height: 16),
-            Expanded(
-              child: stackDetail
-                  ? _buildStackedLayout()
-                  : _buildSideBySideLayout(),
-            ),
-          ],
-        );
-      default: // Events / Settings -> belum dibuat.
-        return const Center(
-          child: Text('Menu ini belum tersedia di prototype.',
-              style: TextStyle(color: AppColors.textSecondary)),
-        );
-    }
+  switch (_selectedMenu) {
+    case 0:
+      // Dashboard
+      return DashboardScreen(
+        properties: _properties,
+      );
+
+    case 1:
+      // Eventaris
+      return AdminDashboardScreen(
+        properties: _properties,
+        onAdd: _addProperty,
+        onUpdate: _updateProperty,
+        onDelete: _deleteProperty,
+        onViewOnMap: _viewPropertyOnMap,
+      );
+
+    case 2:
+      // Peta Properti
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildTopBar(isNarrow),
+          const SizedBox(height: 16),
+          Expanded(
+            child: stackDetail
+                ? _buildStackedLayout()
+                : _buildSideBySideLayout(),
+          ),
+        ],
+      );
+
+    case 3:
+      // Maintenance & Inspection
+      return MaintenanceScreen(
+        properties: _properties,
+      );
+
+    case 4:
+      // Events
+      return const Center(
+        child: Text(
+          'Fitur Events masih dalam tahap pengembangan.',
+          style: TextStyle(
+            color: AppColors.textSecondary,
+          ),
+        ),
+      );
+
+    case 5:
+      // Settings
+      return const Center(
+        child: Text(
+          'Settings belum tersedia di prototype.',
+          style: TextStyle(
+            color: AppColors.textSecondary,
+          ),
+        ),
+      );
+
+    default:
+      return const Center(
+        child: Text(
+          'Menu belum tersedia di prototype.',
+          style: TextStyle(
+            color: AppColors.textSecondary,
+          ),
+        ),
+      );
   }
+}
 
   // ---- Layout variants -----------------------------------------------
 
